@@ -39,6 +39,11 @@ function App() {
     console.log(tasks);
 
   }
+
+
+
+
+
 // accepts a parameter called id which is the id of the task we
   const deleteTask = (id) => {
 // filter method: checks every item in an array again
@@ -52,7 +57,6 @@ let updatedTasks = tasks.filter( (task) => task.id !== id );
 
 // set tasks to be the new updated, filter tasks with the id removed
 setTasks(updatedTasks);
-
 // Long way without filter
 // let updatedTasks = [];
 // for(let i = 0; i < tasks.length; i++) {
@@ -64,13 +68,25 @@ setTasks(updatedTasks);
 // }
 }
 
+const editTask = (id, newText) => {
+// use map method to go through tasks array and check if each tasks id matches the id
+// of the task we want to edit. if the is's match, update the text of the task with the
+// new text. if the id's don't match, the task should remain unchanged  
+let updatedTasks = tasks.map( (task) => (task.id === id) ? {...task, text: newText} : task );
+setTasks(updatedTasks);
+}
+
+
+
+
+
   return (
     <div className="App">
       <h1>My React To Do List</h1>
       {/* passes down the tasks state variable above as a prop called 'tasks' to the child*/}
       {/* <MyComponent propName={originalName} */}
       <AddTask addNewTask={addNewTask} />
-      <TaskList tasks={tasks} deleteTask={deleteTask}/>
+      <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
     </div>
   );
 }
