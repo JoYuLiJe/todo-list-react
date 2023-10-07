@@ -14,7 +14,9 @@ function App() {
 
   // once app architecture/design is good to go, no longer need
   // an initial default task
-  const [tasks, setTasks] = useState([]);
+  // if anything in localStorage for 'tasks', set the tasks state to be that initially
+  // if not,
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
 
   // create a state variable to keep track of welcome message
   const [welcomeMessage, setWelcomeMessage] = useState("Welcome to the To Do List Tracker!");
@@ -119,17 +121,18 @@ useEffect(() => {
 // useEffects for localStorage, one for reading the data from localStorage
 // and one for saving data to localStorage
 
-// reading data from localStorage on initial load
-useEffect(() => {
-  // parse JSON from localStrorage and store in storedTasks variable
-  const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-  // if there were any tasks in local storage, setTasks to be storedTasks
-  // if storedTasks exists and is not empty
-  if (storedTasks) {
-    // settasks state variable to be the storedTasks
-    setTasks(storedTasks);
-  }
-}, []);
+// // reading data from localStorage on initial load
+// replaced by updating the useState function above so that it checks for localStorage itself
+// useEffect(() => {
+//   // parse JSON from localStrorage and store in storedTasks variable
+//   const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+//   // if there were any tasks in local storage, setTasks to be storedTasks
+//   // if storedTasks exists and is not empty
+//   if (storedTasks) {
+//     // settasks state variable to be the storedTasks
+//     setTasks(storedTasks);
+//   }
+// }, []);
 
 // saving data to localStorage whenever tasks updates
 useEffect(() => {

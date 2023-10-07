@@ -11,7 +11,7 @@ const TaskList = ({ tasks, deleteTask, editTask }) => {
 
         {/*Use the map method to take each task in the tasks array and render it in a Task component.
         We pass down the task id, the task itself, and the deleteTask function */}
-          {tasks.map( (task) => (
+          {tasks.map((task) => (
             <Task 
             key={task.id} 
             task={task} 
