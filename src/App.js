@@ -2,15 +2,23 @@
 import './App.css';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   // const [data, setData] = useState(INITIAL VALUE)
   // the structure of the state is an array of objects each with
   // id and test properties
-  const [tasks, setTasks] = useState([
-    { id: 1, text: "Learn React"}
-  ])
+  // const [tasks, setTasks] = useState([
+  //   { id: 1, text: "Learn React"}
+  // ])
+
+  // once app architecture/design is good to go, no longer need
+  // an initial default task
+  const [tasks, setTasks] = useState([]);
+
+  // create a state variable to keep track of welcome message
+  const [welcomeMessage, setWelcomeMessage] = useState("Welcome to the To Do List Tracker!");
+
 
   // write functions that will 'do some stuff' and then use setTasks
   // to update the state
@@ -76,13 +84,65 @@ let updatedTasks = tasks.map( (task) => (task.id === id) ? {...task, text: newTe
 setTasks(updatedTasks);
 }
 
+// Create an effect with useEffect that will allow us to temporarily 
+// display a welcome message
+
+useEffect(() => {
+  // Side effect logic here
+  console.log("welcomeMessage is:", welcomeMessage);
+
+  const timer = setTimeout(() => {
+    setWelcomeMessage("");
+  }, 5000); //wait 5 seconds before running the effect fuction
+
+  // Optional cleanup logic 
+  return () => {
+    // good practice to clearout timer when no longer needed
+      clearTimeout(timer);
+  };
+
+  // only want this effect to run once: when the App compoent renders for the first time
+  // so we leave the dependacncy array empty
+}, []);
 
 
+// check to see if tasks has changed appropriately
+// mimics the functionality of console.log as we're used to using it
+useEffect(() => {
+  console.log("tasks is:", tasks);
+}, [tasks]);
+
+useEffect(() => {
+  console.log("welcomeMessage is:", welcomeMessage);
+}, [welcomeMessage]);
+
+// useEffects for localStorage, one for reading the data from localStorage
+// and one for saving data to localStorage
+
+// reading data from localStorage on initial load
+useEffect(() => {
+  // parse JSON from localStrorage and store in storedTasks variable
+  const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+  // if there were any tasks in local storage, setTasks to be storedTasks
+  // if storedTasks exists and is not empty
+  if (storedTasks) {
+    // settasks state variable to be the storedTasks
+    setTasks(storedTasks);
+  }
+}, []);
+
+// saving data to localStorage whenever tasks updates
+useEffect(() => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}, [tasks]);
 
 
   return (
     <div className="App">
       <h1>My React To Do List</h1>
+      {/* 'short circuiting' */}
+      {/* first checks if welcomeMessage exists if so it renders the message */}
+      {welcomeMessage && <p>{welcomeMessage}</p>}
       {/* passes down the tasks state variable above as a prop called 'tasks' to the child*/}
       {/* <MyComponent propName={originalName} */}
       <AddTask addNewTask={addNewTask} />
@@ -92,3 +152,5 @@ setTasks(updatedTasks);
 }
 
 export default App;
+
+
