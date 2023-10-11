@@ -21,13 +21,26 @@ const AddTask = ({ addNewTask }) => { //pass the addNewTask function as a prop
     }
 
     return(
-        <div>
+        <div className="mb-3">
             <h2>Add Task</h2>
 
             {/* call the onSubmit function when form is submitted */}
             <form onSubmit={onSubmit}>
-                <input type="text" placeholder="Enter a new task" value={text} onChange={(e) => setText(e.target.value)}/>
-                <button type="submit">Save Task</button>
+                {/* input-gorup groups an input with an "add-on", like a button or an icon ensures the input and the button sit together without any gap, making them appear as a single UI element */}
+              <div className="input-group">
+                <input 
+                    type="text" 
+                    // form-control allows input styling to be consitent
+                    // padding, rounded corners, borders
+                    // stretches input to take full available of width of the parent
+                    className="form-control"
+                    placeholder="Enter a new task" 
+                    value={text} 
+                    onChange={(e) => setText(e.target.value)}/> 
+                    {/* btn just gives the button 'chape' and padding, etc. 
+                    btn-primary assigns it a primary color, which is by default b*/}
+                <button type="submit" className="btn btn-primary input-group-append">Save Task</button>
+              </div>
             </form>
             {/* <p>{JSON.stringify(tasks)}</p>Stringified version of props.tasks */}
             {/* <p>{example}</p> */}

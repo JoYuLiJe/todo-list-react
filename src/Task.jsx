@@ -26,22 +26,29 @@ const Task = ({ task, deleteTask, editTask }) => {
     }
 
     return(
-        <div>
-            {/* renduring the text from the task in an h3 
+        // list-group-item styles list item in a way such that they are visually distinct from each other and also provides some padding
+        // d-flex establishes a container/element as a flexbox(allows direct children to be laid out in a row)
+        // justify-content-between -> maximizes available space between children
+        // align-items-center vertically aligns children in the middle
+        <li className="List-group-item d-flex justify-content-between align-items-center">
+        {/* renduring the text from the task in an h3 
             along with a button whose onClick function will
             be the deleteTask function*/}
-            <h3>
-                {/* ternary operator: if isEditing is true, display the editing input field
-                but if it's false, display the text of the task*/}
-                {isEditing 
-                    ? <input type="text" placeholder="Enter a new task" value={newText} onChange={(e) => setNewText(e.target.value)}/>
-                    : task.text
-                } 
-                {/* if in editing mode button should say 'Confirm', and if not button should say 'Edit' */}
-                <button onClick={() => handleEditClick()}>{isEditing? "Confirm" : "Edit"}</button>
-                <button onClick={() => deleteTask(task.id)}>Delete</button>
-            </h3>
-        </div>
+            
+        {/* ternary operator: if isEditing is true, display the editing input field but if it's false, display the text of the task*/}
+        {isEditing 
+            ? <input type="text" placeholder="Enter a new task" value={newText} onChange={(e) => setNewText(e.target.value)}/>
+            : task.text
+        } 
+        {/* if in editing mode button should say 'Confirm', and if not button should say 'Edit' */}
+
+        {/* buttons in div together so they are treated as single element fordisplay flex purposes*/}
+         <div>
+            <button onClick={() => handleEditClick()}>{isEditing ? "Confirm" : "Edit"}</button>
+            <button onClick={() => deleteTask(task.id)}>Delete</button>
+         </div>
+            
+        </li>
     )
 }
 

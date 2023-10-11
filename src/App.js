@@ -1,4 +1,4 @@
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
@@ -141,8 +141,17 @@ useEffect(() => {
 
 
   return (
-    <div className="App">
-      <h1>My React To Do List</h1>
+    // container provides a fixed-wdith container
+    // has a max-width that changes at different 'breakpoints'
+    // automatically applies horizontal padding so content reamins centered and has
+    // consistent spacing around edges of the screen
+
+
+
+    // bootstrap spacing ranges from 0 to 5 (or auto)
+    // mt, mb, mr, ml, mx, my ... pt, pb, pr, pl, px, py
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">My React To Do List</h1>
       {/* 'short circuiting' */}
       {/* first checks if welcomeMessage exists if so it renders the message */}
       {welcomeMessage && <p>{welcomeMessage}</p>}
