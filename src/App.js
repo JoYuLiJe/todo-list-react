@@ -105,7 +105,7 @@ useEffect(() => {
 
   // only want this effect to run once: when the App compoent renders for the first time
   // so we leave the dependacncy array empty
-}, []);
+}, [welcomeMessage]);
 
 
 // check to see if tasks has changed appropriately
@@ -154,11 +154,24 @@ useEffect(() => {
       <h1 className="text-center mb-4">My React To Do List</h1>
       {/* 'short circuiting' */}
       {/* first checks if welcomeMessage exists if so it renders the message */}
-      {welcomeMessage && <p>{welcomeMessage}</p>}
+      {welcomeMessage && <p className="text-center">{welcomeMessage}</p>}
       {/* passes down the tasks state variable above as a prop called 'tasks' to the child*/}
       {/* <MyComponent propName={originalName} */}
-      <AddTask addNewTask={addNewTask} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
+
+
+      {/* CSS/styling is not applied to React components directly only to the HTML elements inside their JSX */}
+      <div className="row">
+        {/* AddTask should take up 1/3 of the width on screens size 'medium' or larger */}
+        {/* bootstrap based on 12 column system, so 1/3 of the width is 4 columns*/}
+        <div className="col-md-4">
+          <AddTask addNewTask={addNewTask} />
+          <div className="col-md-8">
+            {/* TaskList to take up 2/3 of the width on screens medium or larger */}
+          
+            <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
