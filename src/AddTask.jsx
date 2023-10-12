@@ -15,9 +15,11 @@ const AddTask = ({ addNewTask }) => { //pass the addNewTask function as a prop
     const onSubmit = (e) => {
         e.preventDefault();
         // creates an object with a jey anmed text whose value is the test state
+        if (text.replaceALL(" ", "").length > 0) {
         addNewTask( { text } ); //same thing as addNewTask({text : "Learn React"})
         // reset the text ub tge input field
         setText('');
+        }
     }
 
     return(

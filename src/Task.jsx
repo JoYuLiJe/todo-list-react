@@ -44,8 +44,8 @@ const Task = ({ task, deleteTask, editTask }) => {
 
         {/* buttons in div together so they are treated as single element fordisplay flex purposes*/}
          <div>
-            <button onClick={() => handleEditClick()}>{isEditing ? "Confirm" : "Edit"}</button>
-            <button onClick={() => deleteTask(task.id)}>Delete</button>
+            <button className="btn btn-outline-info" onClick={() => handleEditClick()}>{isEditing ? "Confirm" : "Edit"}</button>
+            <button className="btn btn-outline-danger" onClick={() => deleteTask(task.id)}>Delete</button>
          </div>
             
         </li>
