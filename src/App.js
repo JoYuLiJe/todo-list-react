@@ -163,9 +163,9 @@ useEffect(() => {
       <div className="row">
         {/* AddTask should take up 1/3 of the width on screens size 'medium' or larger */}
         {/* bootstrap based on 12 column system, so 1/3 of the width is 4 columns*/}
-        <div className="col-md-4">
+        <div className="col-lg-6 col-md-4">
           <AddTask addNewTask={addNewTask} />
-          <div className="col-md-8">
+          <div className="collg-6 col-md-8">
             {/* TaskList to take up 2/3 of the width on screens medium or larger */}
           
             <TaskList tasks={tasks} deleteTask={deleteTask} editTask={editTask}/>
